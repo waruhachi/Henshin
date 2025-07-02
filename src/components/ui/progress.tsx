@@ -2,6 +2,7 @@
 
 import type * as React from 'react';
 
+// biome-ignore lint/performance/noNamespaceImport: <shadcn/ui>
 import * as ProgressPrimitive from '@radix-ui/react-progress';
 
 import { cn } from '@/lib/utils';
