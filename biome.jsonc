@@ -1,0 +1,47 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.0.6/schema.json",
+	"extends": ["ultracite"],
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab",
+		"indentWidth": 4
+	},
+	"javascript": {
+		"formatter": {
+			"indentStyle": "tab",
+			"indentWidth": 4
+		}
+	},
+	"json": {
+		"formatter": {
+			"indentStyle": "tab",
+			"indentWidth": 4
+		}
+	},
+	"assist": {
+		"actions": {
+			"source": {
+				"organizeImports": {
+					"level": "on",
+					"options": {
+						"groups": [
+							{ "type": true },
+							":BLANK_LINE:",
+							":PACKAGE:",
+							":BLANK_LINE:",
+							":BLANK_LINE:",
+							":PACKAGE_WITH_PROTOCOL:",
+							":ALIAS:",
+							":BLANK_LINE:",
+							":PATH:",
+							":BLANK_LINE:",
+							":URL:",
+							":BLANK_LINE:",
+							"**"
+						]
+					}
+				}
+			}
+		}
+	}
+}
