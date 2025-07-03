@@ -1,5 +1,3 @@
-'use client';
-
 import type * as React from 'react';
 
 // biome-ignore lint/performance/noNamespaceImport: <shadcn/ui>
