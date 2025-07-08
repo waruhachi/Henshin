@@ -382,7 +382,7 @@ export const DialogStackFooter = ({
 }: HTMLAttributes<HTMLDivElement>) => (
 	<div
 		className={cn(
-			'flex items-center justify-end space-x-2 pt-4',
+			'flex items-center justify-between space-x-2 pt-4',
 			className
 		)}
 		{...props}

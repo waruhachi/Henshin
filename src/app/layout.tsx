@@ -6,7 +6,7 @@ import './globals.css';
 import { NextSSRPlugin } from '@uploadthing/react/next-ssr-plugin';
 import { extractRouterConfig } from 'uploadthing/server';
 
-import { uploadRouter } from '@/app/api/upload/core';
+import { uploadRouter } from '@/app/api/uploadthing/core';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
 
@@ -46,7 +46,7 @@ export default function RootLayout({
 						routerConfig={extractRouterConfig(uploadRouter)}
 					/>
 					{children}
-					<Toaster closeButton richColors />
+					<Toaster richColors />
 				</ThemeProvider>
 			</body>
 		</html>

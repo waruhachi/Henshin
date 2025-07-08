@@ -9,7 +9,6 @@ export async function GET(request: NextRequest) {
 	}
 
 	try {
-		// Validate that the URL is from allowed domains for security
 		const url = new URL(imageUrl);
 		const allowedDomains = [
 			'is1-ssl.mzstatic.com',
@@ -23,7 +22,6 @@ export async function GET(request: NextRequest) {
 			return new NextResponse('Domain not allowed', { status: 403 });
 		}
 
-		// Fetch the image
 		const response = await fetch(imageUrl, {
 			headers: {
 				'User-Agent': 'Mozilla/5.0 (compatible; Next.js Image Proxy)',
@@ -41,7 +39,6 @@ export async function GET(request: NextRequest) {
 
 		const contentType = response.headers.get('content-type');
 
-		// Validate that we actually got an image
 		if (!contentType?.startsWith('image/')) {
 			return new NextResponse('Response is not an image', {
 				status: 400,
@@ -50,11 +47,10 @@ export async function GET(request: NextRequest) {
 
 		const imageBuffer = await response.arrayBuffer();
 
-		// Return the image with appropriate headers
 		return new NextResponse(imageBuffer, {
 			headers: {
 				'Content-Type': contentType,
-				'Cache-Control': 'public, max-age=86400, s-maxage=86400', // Cache for 24 hours
+				'Cache-Control': 'public, max-age=86400, s-maxage=86400',
 				'Content-Length': imageBuffer.byteLength.toString(),
 			},
 		});

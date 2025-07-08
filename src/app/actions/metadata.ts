@@ -31,28 +31,43 @@ export async function getMetadata(formData: FormData) {
 		data.CFBundleShortVersionString ?? data.CFBundleVersion ?? '';
 	const bundleId = data.CFBundleIdentifier ?? '';
 
-	const response = await fetch(
-		`/api/metadata?appName=${encodeURIComponent(name)}`
-	);
-	if (!response.ok) {
-		throw new Error('Failed to fetch App Store metadata');
-	}
-	const storeMetadata = (await response.json()) as {
-		icon?: string;
-		rating?: number;
-		description?: string;
-		developer?: string;
-	};
-
-	const metadata: AppMetadata = {
-		icon: storeMetadata.icon ?? '',
+	const baseMetadata: AppMetadata = {
+		icon: '',
 		name,
 		version,
 		bundleId,
-		rating: storeMetadata.rating ?? 0,
-		description: storeMetadata.description,
-		developer: storeMetadata.developer ?? '',
+		rating: 0,
+		description: undefined,
+		developer: '',
+		isPartial: false,
 	};
 
-	return metadata;
+	try {
+		const response = await fetch(
+			`/api/metadata?appName=${encodeURIComponent(name)}`
+		);
+		if (!response.ok) {
+			throw new Error('Failed to fetch App Store metadata');
+		}
+		const storeMetadata = (await response.json()) as {
+			icon?: string;
+			rating?: number;
+			description?: string;
+			developer?: string;
+		};
+
+		return {
+			...baseMetadata,
+			icon: storeMetadata.icon ?? '',
+			rating: storeMetadata.rating ?? 0,
+			description: storeMetadata.description,
+			developer: storeMetadata.developer ?? '',
+			isPartial: false,
+		};
+	} catch {
+		return {
+			...baseMetadata,
+			isPartial: true,
+		};
+	}
 }

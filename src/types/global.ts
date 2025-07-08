@@ -6,6 +6,7 @@ export interface AppMetadata {
 	rating: number;
 	description?: string;
 	developer?: string;
+	isPartial?: boolean;
 }
 
 export interface ProcessingFlags {
